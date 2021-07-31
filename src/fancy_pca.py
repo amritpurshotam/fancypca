@@ -1,3 +1,5 @@
+from typing import List
+
 import tensorflow as tf
 
 
@@ -34,7 +36,7 @@ def cov(m: tf.Tensor, rowvar: bool = True, bias: bool = False) -> tf.Tensor:
         return covariance
 
 
-def fancy_pca(img: tf.Tensor, alpha_std: float = 0.1) -> tf.Tensor:
+def fancy_pca(img: tf.Tensor, alphas: List[float]) -> tf.Tensor:
 
     """PCA Colour Augmentation as described in AlexNet paper.
 
@@ -42,9 +44,8 @@ def fancy_pca(img: tf.Tensor, alpha_std: float = 0.1) -> tf.Tensor:
     ----------
     img : tf.Tensor
         3-dimensional Tensor of shape (h, w, 3)
-    imagenet_pca : bool, optional
-        Whether or not to use pre-computed imagenet principal components (from
-        the whole dataset), by default False
+    alphas: List[float]
+        The 3 random normal alpha values
 
     Returns
     -------
@@ -64,7 +65,7 @@ def fancy_pca(img: tf.Tensor, alpha_std: float = 0.1) -> tf.Tensor:
     covariance = cov(img, rowvar=False, bias=True)
     lambdas, p, _ = tf.linalg.svd(covariance)
 
-    alphas = tf.random.normal((3,), 0, alpha_std)
+    alphas = tf.constant(alphas)
     delta = tf.tensordot(p, alphas * lambdas, axes=1)
 
     img = img + delta
