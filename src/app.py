@@ -32,6 +32,21 @@ def augment_image():
     st.session_state.pca_image = pca_image
 
 
+def reset_alphas():
+    st.session_state.alpha_1 = 0.0
+    st.session_state.alpha_2 = 0.0
+    st.session_state.alpha_3 = 0.0
+    augment_image()
+
+
+def randomize_alphas():
+    alpha_1, alpha_2, alpha_3 = list(tf.random.normal((3,), mean=0, stddev=1).numpy())
+    st.session_state.alpha_1 = alpha_1
+    st.session_state.alpha_2 = alpha_2
+    st.session_state.alpha_3 = alpha_3
+    augment_image()
+
+
 if "pca_image" not in st.session_state:
     augment_image()
 
@@ -72,3 +87,7 @@ col3.slider(
     key="alpha_3",
     on_change=augment_image,
 )
+
+col1, col2 = st.beta_columns([0.12, 1])
+col1.button("Reset", on_click=reset_alphas)
+col2.button("Randomize", on_click=randomize_alphas)
