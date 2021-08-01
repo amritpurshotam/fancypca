@@ -36,7 +36,7 @@ alpha_3 = col3.slider(
     value=float(alphas[2]),
 )
 
-image = tf.io.read_file("./images/bird3.jpg")
+image = tf.io.read_file("./images/bird.jpg")
 image = tf.image.decode_jpeg(image, channels=3)
 pca_image = fancy_pca(image, [alpha_1, alpha_2, alpha_3])
 
