@@ -4,7 +4,7 @@ import tensorflow as tf
 from fancy_pca import fancy_pca
 
 if "min_alpha" not in st.session_state:
-    st.session_state.min_alpha = -2.0
+    st.session_state.min_alpha = -3.0
 
 if "max_alpha" not in st.session_state:
     st.session_state.max_alpha = 3.0
