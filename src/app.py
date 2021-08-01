@@ -23,13 +23,6 @@ if "image" not in st.session_state:
     image = tf.image.decode_jpeg(image, channels=3)
     st.session_state.image = image
 
-if "pca_image" not in st.session_state:
-    pca_image = fancy_pca(
-        st.session_state.image,
-        [st.session_state.alpha_1, st.session_state.alpha_2, st.session_state.alpha_3],
-    )
-    st.session_state.pca_image = pca_image
-
 
 def augment_image():
     pca_image = fancy_pca(
@@ -37,6 +30,10 @@ def augment_image():
         [st.session_state.alpha_1, st.session_state.alpha_2, st.session_state.alpha_3],
     )
     st.session_state.pca_image = pca_image
+
+
+if "pca_image" not in st.session_state:
+    augment_image()
 
 
 st.title("PCA Colour Augmentation")
