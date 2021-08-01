@@ -52,7 +52,6 @@ if "pca_image" not in st.session_state:
 
 
 st.title("PCA Colour Augmentation")
-st.header("Demo")
 
 col1, col2 = st.beta_columns(2)
 
