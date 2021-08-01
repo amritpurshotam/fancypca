@@ -92,10 +92,9 @@ col1.button("Reset", on_click=reset_alphas)
 col2.button("Randomize", on_click=randomize_alphas)
 
 st.header("References")
-authors = "Krizhevsky, A., Sutskever, I., & Hinton, G."
+authors = "A. Krizhevsky, I. Sutskever, G. Hinton"
 year = 2012
 title = "ImageNet Classification with Deep Convolutional Neural Networks"
 url = "https://proceedings.neurips.cc/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf"  # noqa: B950
 booktitle = "Advances in Neural Information Processing Systems"
-publisher = "Curran Associates, Inc."
-st.markdown(f"{authors} ({year}). [{title}]({url}). In _{booktitle}_. {publisher}")
+st.markdown(f"{authors}. [{title}]({url}). In _{booktitle}_. {year}.")
