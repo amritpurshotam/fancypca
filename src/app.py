@@ -90,3 +90,12 @@ col3.slider(
 col1, col2 = st.beta_columns([0.12, 1])
 col1.button("Reset", on_click=reset_alphas)
 col2.button("Randomize", on_click=randomize_alphas)
+
+st.header("References")
+authors = "Krizhevsky, A., Sutskever, I., & Hinton, G."
+year = 2012
+title = "ImageNet Classification with Deep Convolutional Neural Networks"
+url = "https://proceedings.neurips.cc/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf"  # noqa: B950
+booktitle = "Advances in Neural Information Processing Systems"
+publisher = "Curran Associates, Inc."
+st.markdown(f"{authors} ({year}). [{title}]({url}). In _{booktitle}_. {publisher}")
