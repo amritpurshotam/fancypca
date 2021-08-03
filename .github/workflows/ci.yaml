@@ -39,16 +39,16 @@ jobs:
 
       - name: Lint with flake8
         run: |
-          flake8 --config=setup.cfg src setup.py
+          flake8 --config=setup.cfg fancy_pca.py streamlit_app.py
 
       - name: Format with black
         run: |
-          black --check src setup.py
+          black --check fancy_pca.py streamlit_app.py
 
       - name: Format with isort
         run: |
-          isort --check --settings-path=setup.cfg src setup.py
+          isort --check --settings-path=setup.cfg fancy_pca.py streamlit_app.py
 
       - name: Type-check with mypy
         run: |
-          mypy --config-file=setup.cfg src setup.py
+          mypy --config-file=setup.cfg fancy_pca.py streamlit_app.py
