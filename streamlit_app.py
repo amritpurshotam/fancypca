@@ -1,7 +1,11 @@
 import streamlit as st
 import tensorflow as tf
+from PIL import Image
 
 from fancy_pca import fancy_pca
+
+st.title("PCA Colour Augmentation")
+user_image = st.file_uploader("Try your own image...", type=["jpg"])
 
 if "min_alpha" not in st.session_state:
     st.session_state.min_alpha = -3.0
@@ -32,6 +36,14 @@ def augment_image():
     st.session_state.pca_image = pca_image
 
 
+if user_image is not None:
+    image = Image.open(user_image)
+    image = tf.keras.preprocessing.image.img_to_array(image, dtype="int")
+    image = tf.convert_to_tensor(image)
+    st.session_state.image = image
+    augment_image()
+
+
 def reset_alphas():
     st.session_state.alpha_1 = 0.0
     st.session_state.alpha_2 = 0.0
@@ -49,9 +61,6 @@ def randomize_alphas():
 
 if "pca_image" not in st.session_state:
     augment_image()
-
-
-st.title("PCA Colour Augmentation")
 
 col1, col2 = st.beta_columns(2)
 
