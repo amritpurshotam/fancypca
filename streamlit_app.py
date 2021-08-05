@@ -1,4 +1,3 @@
-# flake8: noqa
 import streamlit as st
 import tensorflow as tf
 from PIL import Image
@@ -103,27 +102,30 @@ col2.button("Randomize", on_click=randomize_alphas)
 
 st.header("Explanation")
 st.markdown(
-    "The second form of data augmentation consists of altering the intensities of "
-    + "the RGB channels in training images. Specifically, we perform PCA on the set "
-    + "of RGB pixel values throughout the ImageNet training set. To each training "
-    + "image, we add multiples of the found principal components, with magnitudes "
-    + "proportional to the corresponding eigenvalues times a random variable drawn "
-    + "from a Gaussian with mean zero and standard deviation 0.1. Therefore to "
-    + "each RGB image pixel $I_{xy}=[I_{xy}^R, I_{xy}^G, I_{xy}^B]^T$ we add the "
-    + "following quantity:"
-    + r"""
+    r"""
+The second form of data augmentation consists of altering the intensities of
+the RGB channels in training images. Specifically, we perform PCA on the set
+of RGB pixel values throughout the ImageNet training set. To each training
+image, we add multiples of the found principal components, with magnitudes
+proportional to the corresponding eigenvalues times a random variable drawn
+from a Gaussian with mean zero and standard deviation 0.1. Therefore to
+each RGB image pixel $I_{xy}=[I_{xy}^R, I_{xy}^G, I_{xy}^B]^T$ we add the
+following quantity:
+
 $$
-[\mathbf{p}_1, \mathbf{p}_2, \mathbf{p}_3][\alpha_1\lambda_1, \alpha_2\lambda_2, \alpha_3\lambda_3]^T
+[\mathbf{p}_1, \mathbf{p}_2, \mathbf{p}_3]
+[\alpha_1\lambda_1, \alpha_2\lambda_2, \alpha_3\lambda_3]^T
 $$
+
+where $\mathbf{p}_i$ and $\lambda_i$ are $i$th eigenvector and eigenvalue of
+the $3 \times 3$ covariance matrix of RGB pixel values, respectively, and
+$\alpha_i$ is the aforementioned random variable. Each $\alpha_i$ is
+drawn only once for all the pixels of a particular training image until
+that image is used for training again, at which point it is re-drawn.
+This scheme approximately captures an important property of natural images,
+namely, that object identity is invariant to changes in the intensity and
+color of the illumination.
 """
-    + "where $\mathbf{p}_i$ and $\lambda_i$ are $i$th eigenvector and eigenvalue of "
-    + "the $3 \\times 3$ covariance matrix of RGB pixel values, respectively, and "
-    + "$\\alpha_i$ is the aforementioned random variable. Each $\\alpha_i$ is "
-    + "drawn only once for all the pixels of a particular training image until "
-    + "that image is used for training again, at which point it is re-drawn. "
-    + "This scheme approximately captures an important property of natural images, "
-    + "namely, that object identity is invariant to changes in the intensity and "
-    + "color of the illumination."
 )
 
 st.header("References")
