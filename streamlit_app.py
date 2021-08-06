@@ -103,28 +103,31 @@ col2.button("Randomize", on_click=randomize_alphas)
 st.header("Explanation")
 st.markdown(
     r"""
-The second form of data augmentation consists of altering the intensities of
-the RGB channels in training images. Specifically, we perform PCA on the set
-of RGB pixel values throughout the ImageNet training set. To each training
-image, we add multiples of the found principal components, with magnitudes
-proportional to the corresponding eigenvalues times a random variable drawn
-from a Gaussian with mean zero and standard deviation 0.1. Therefore to
-each RGB image pixel $I_{xy}=[I_{xy}^R, I_{xy}^G, I_{xy}^B]^T$ we add the
-following quantity:
+PCA Colour Augmentation is an image augmentation technique that consists of altering
+the intensities in each of the RGB channels.
+
+In short, the principal components of the image are calculated along the RGB colour
+channels i.e. each colour channel is treated as an independent feature so an image
+with shape $(h, w, 3)$ is reshaped to $(hw, 3)$. These principal components are then
+added to the image with magnitudes proportional to their corresponding eigenvalue
+times a random variable drawn from a Gaussian with mean zero and standard deviation 0.1.
+
+More rigorously, to each RGB image pixel $I_{xy}=[I_{xy}^R, I_{xy}^G, I_{xy}^B]^T$ we
+add
 
 $$
 [\mathbf{p}_1, \mathbf{p}_2, \mathbf{p}_3]
 [\alpha_1\lambda_1, \alpha_2\lambda_2, \alpha_3\lambda_3]^T
 $$
 
-where $\mathbf{p}_i$ and $\lambda_i$ are $i$th eigenvector and eigenvalue of
+where $\mathbf{p}_i$ and $\lambda_i$ are the $i$th eigenvector and eigenvalue of
 the $3 \times 3$ covariance matrix of RGB pixel values, respectively, and
-$\alpha_i$ is the aforementioned random variable. Each $\alpha_i$ is
-drawn only once for all the pixels of a particular training image until
-that image is used for training again, at which point it is re-drawn.
-This scheme approximately captures an important property of natural images,
-namely, that object identity is invariant to changes in the intensity and
-color of the illumination.
+$\alpha_i$ is the random variable.
+
+The intuitition behind this technique is that it captures an important property
+of natural images that object identity is invariant to changes in the intensity
+and colour of the illumination. In the AlexNet paper [1] the authors reduced their
+top-1 error rate by over 1% with this scheme.
 """
 )
 
@@ -132,6 +135,15 @@ st.header("References")
 authors = "A. Krizhevsky, I. Sutskever, G. Hinton"
 year = 2012
 title = "ImageNet Classification with Deep Convolutional Neural Networks"
-url = "https://proceedings.neurips.cc/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf"
+url = "https://proceedings.neurips.cc/paper/2012/file/c399862d3b9d6b76c8436e924a68c45b-Paper.pdf"  # noqa: B950
 booktitle = "Advances in Neural Information Processing Systems"
-st.markdown(f"{authors}. [{title}]({url}). In _{booktitle}_. {year}.")
+
+st.markdown(
+    f"""
+1. {authors}. [{title}]({url}). In _{booktitle}_. {year}.
+
+2. D. Clode.
+[A Black-capped Lory eating an apple](https://unsplash.com/photos/7JrLPQXPVCI).
+On _Unsplash_. 2021
+"""
+)
