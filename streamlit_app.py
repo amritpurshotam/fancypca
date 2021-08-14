@@ -62,7 +62,7 @@ def randomize_alphas():
 if "pca_image" not in st.session_state:
     augment_image()
 
-col1, col2 = st.beta_columns(2)
+col1, col2 = st.columns(2)
 
 col1.subheader("Original")
 col1.image(st.session_state.image.numpy(), use_column_width=True)
@@ -70,7 +70,7 @@ col1.image(st.session_state.image.numpy(), use_column_width=True)
 col2.subheader("PCA Colour Augmented")
 col2.image(st.session_state.pca_image.numpy(), use_column_width=True)
 
-col1, col2, col3 = st.beta_columns(3)
+col1, col2, col3 = st.columns(3)
 col1.slider(
     "Alpha 1",
     min_value=st.session_state.min_alpha,
@@ -96,7 +96,7 @@ col3.slider(
     on_change=augment_image,
 )
 
-col1, col2 = st.beta_columns([0.12, 1])
+col1, col2 = st.columns([0.12, 1])
 col1.button("Reset", on_click=reset_alphas)
 col2.button("Randomize", on_click=randomize_alphas)
 
