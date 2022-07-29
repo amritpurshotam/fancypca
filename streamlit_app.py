@@ -142,8 +142,6 @@ st.markdown(
     f"""
 1. {authors}. [{title}]({url}). In _{booktitle}_. {year}.
 
-2. D. Clode.
-[A Black-capped Lory eating an apple](https://unsplash.com/photos/7JrLPQXPVCI).
-On _Unsplash_. 2021
+2. D. Clode. [A Black-capped Lory eating an apple](https://unsplash.com/photos/7JrLPQXPVCI). On _Unsplash_. 2021
 """
 )
